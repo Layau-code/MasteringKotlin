@@ -1,18 +1,35 @@
 package com.layor
 
 fun main(args: Array<String>){
-    val name : String? = "Alice"
-    var age = 18
-    printNameAndage(name, age)
-    val length = name?.length
-    println(length)
-    println(leagle(name))
+ //使用user类
+   val user=User("layor", 27)
+    val user1=User("layor", 27)
 
-}
+    println(user==user1)
+    println(user===user1)
+    println(user.hashCode())
+    println(user1.hashCode())
+    println(user.toString())
+    println(user1.toString())
+    println(user)
+//使用copy方法
+ val user2=user.copy("layor")
+ println(user2)
+ println(user2.component1())
+ println(user2.component2())
+ println(user1==user2)
+ //解构赋值
+ val (name, age)=user
+ println("name:$name, age:$age")
 
-private fun printNameAndage(name: String?, age: Int) {
-    println("${name}今年${age + 1}岁了")
-}
-private fun leagle(name: String?) :Boolean{
-    return name!=null&&name.length>3
+ //使用数据类嵌套
+ val article=Article(
+   title="Kotlin",
+  author=User("layor", 27)
+ , content="Kotlin is a modern programming language"
+ , date="2020-01-01"
+ , id=1
+ , tags= listOf("Kotlin", "Programming"))
+ println(article)
+
 }
