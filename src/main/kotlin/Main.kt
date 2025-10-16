@@ -1,35 +1,16 @@
 package com.layor
 
 fun main(args: Array<String>){
- //使用user类
-   val user=User("layor", 27)
-    val user1=User("layor", 27)
+ //Elvis操作符
+ val name :String? = null
+ val length = name?.length ?: -1
+ println(length)
+ //非空断言
+ //val len= name!!.length
+//空处理函数
+ printNameAndage(name, 18)
 
-    println(user==user1)
-    println(user===user1)
-    println(user.hashCode())
-    println(user1.hashCode())
-    println(user.toString())
-    println(user1.toString())
-    println(user)
-//使用copy方法
- val user2=user.copy("layor")
- println(user2)
- println(user2.component1())
- println(user2.component2())
- println(user1==user2)
- //解构赋值
- val (name, age)=user
- println("name:$name, age:$age")
-
- //使用数据类嵌套
- val article=Article(
-   title="Kotlin",
-  author=User("layor", 27)
- , content="Kotlin is a modern programming language"
- , date="2020-01-01"
- , id=1
- , tags= listOf("Kotlin", "Programming"))
- println(article)
-
+}
+private  fun printNameAndage(name: String?, age: Int){
+    println("名字是${name?:"匿名"}，年龄是${age}")
 }
