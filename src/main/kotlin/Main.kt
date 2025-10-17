@@ -1,18 +1,16 @@
 package com.layor
 
     fun main(args: Array<String>){
-        val address ="1891@.com"
-        val isValid = address.isValidEmail()
-        println(isValid)
-        val numbers = listOf(1,2,3,4,5)
-        val sum = numbers.sum()
-        println(sum)
+      val list = listOf("liabi","layor","layor","kl")
+      val list2 = mutableListOf("liabi","layor","layor","kl")
+       val isL = list.filter{it.startsWith("l")}
+        println(isL)
+        list2.add("zhangdan")
+        list2.remove("layor")
+       val list3 = list2.map{it.uppercase()}
+        //链式调用
+        val list4 = list2.filter{it.startsWith("l")}.map{it.uppercase()}
+        println(list4)
+        println(list3+list2)
+
     }
-//扩展函数
-fun String.isValidEmail(): Boolean {
-    return Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+").matches(this)
-}
-//扩展List<Int>
-fun List<Int>.sum(): Int {
-    return this.fold(0) { sum, i -> sum + i }
-}
