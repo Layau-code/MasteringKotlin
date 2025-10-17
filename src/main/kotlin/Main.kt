@@ -1,16 +1,22 @@
 package com.layor
 
-fun main(args: Array<String>){
- //Elvis操作符
- val name :String? = null
- val length = name?.length ?: -1
- println(length)
- //非空断言
- //val len= name!!.length
-//空处理函数
- printNameAndage(name, 18)
+    fun main(args: Array<String>){
+        val name1 = "layor"
+        val greet ="hi"
+        GreetUtil().greet(name1)
+        GreetUtil().greet(name=name1,greet)
 
+        3 times "hello"
+
+    }
+infix fun Int.times(str:String){
+   val result = str.repeat( this)
+    println(result)
 }
-private  fun printNameAndage(name: String?, age: Int){
-    println("名字是${name?:"匿名"}，年龄是${age}")
-}
+
+
+    class GreetUtil{
+        fun greet(name: String?,greet : String = "hello"){
+            println("$greet!$name")
+        }
+    }
