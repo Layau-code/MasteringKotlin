@@ -1,16 +1,28 @@
 package com.layor
 
     fun main(args: Array<String>){
-      val list = listOf("liabi","layor","layor","kl")
-      val list2 = mutableListOf("liabi","layor","layor","kl")
-       val isL = list.filter{it.startsWith("l")}
-        println(isL)
-        list2.add("zhangdan")
-        list2.remove("layor")
-       val list3 = list2.map{it.uppercase()}
-        //链式调用
-        val list4 = list2.filter{it.startsWith("l")}.map{it.uppercase()}
-        println(list4)
-        println(list3+list2)
+        //apply
+        val note = Note().apply {
+            title = "学习Kotlin"
+            content = "今天学了apply"
+            createdAt = System.currentTimeMillis()
+        }
+        println(note)
+        //also
+        val list = mutableListOf(1,2,3)
+        list.also { println("添加前：$list") }
+            .add(4)
+            .also { println("添加后：$list") }
+        //let
+        val name: String? = "a"
+        name?.let {
+            println("名字是: $it")  // it 指代 name
+            println("长度: ${it.length}")
+        }
+        //run
+        val result = note.run {
+            "$title - ${content.take(10)}..."
+        }
+        println(result) // 学习Kotlin - 今天学了app...
 
     }
