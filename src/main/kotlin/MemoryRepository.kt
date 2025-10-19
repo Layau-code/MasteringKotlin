@@ -4,28 +4,45 @@ class MemoryRepository : BaseNoteRepository{
     private val notes = mutableListOf<Note>()
     private val noteReader = NoteReader()
     init {
-        val savedNotes = noteReader.loadNotes()
-        notes.addAll(savedNotes)
+        val savedNotes = noteReader.loadNotes().onSuccess {
+            note -> notes.addAll(note)
+            println("已加载笔记：${note.size}")
+        }.onFailure {
+            e -> println("加载笔记失败：${e.message}")
+        }
+
     }
-    override fun getAll(): List<Note> {
+    override fun getAll(): List<Note>{
         return notes
     }
 
     override fun insert (note: Note) {
-        notes.add(note)
-        noteReader.saveNotes(notes)
+        //如果不存在才插入
+        if (notes.none { it.id == note.id }) {
+            notes.add(note)
+            val result = noteReader.saveNotes(notes)
+            result.onSuccess { print("保存成功: ${note}") }
+                .onFailure { print("保存失败：${it.message}") }
+        }else{
+            print("笔记已存在：note id=${note.id}")
+        }
+
     }
 
     override fun delete(id: Int) {
         notes.removeIf { it.id == id }.also { print("删除成功：${id}") }
-        noteReader.saveNotes(notes)
+       val result = noteReader.saveNotes(notes)
+        result.onSuccess { print("保存成功") }
+            .onFailure { print("保存失败：${it.message}") }
     }
 
     override fun update(note: Note) {
         val index = notes.indexOfFirst { it.id == note.id }
         if (index != -1) {
             notes[index] = note
-            noteReader.saveNotes(notes)
+            val result = noteReader.saveNotes(notes)
+            result.onSuccess { print("保存成功") }
+                .onFailure { print("保存失败：${it.message}") }
         }
     }
 
