@@ -1,1 +1,1 @@
-Kotlin从入门到精通的代码练习，layau学习KOtlin语法的一些demo
+Kotlin从入门到精通的代码练习，layau学习Kotlin语法的一些demo
